@@ -14,8 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +24,7 @@ public class QnaListService {
 
     @Autowired
     private QnaInfoDao qnaInfoDao;
+
     private QnaInfores qnaInfores;
 
     //WebSecurityConfig에서 Bean으로 생성된 의존성을 주입받음
@@ -51,18 +50,17 @@ public class QnaListService {
         }else{
             qnaInfores.setPassWord(params.get("Password"));
         }
-        String resp = String.valueOf(qnaInfoDao.save(qnaInfores));
-        return resp;
+
+        return String.valueOf(qnaInfoDao.save(qnaInfores));
     }
 
     public boolean matchPassword(HashMap<String, String> params) {
 
         String password = params.get("Password");
-        logger.info("**"+params.get("qnaId"));
         QnaInfores qnaInfores = new QnaInfores();
         qnaInfores.setQnaId((long) Integer.parseInt(params.get("qnaId")));
 
-            Optional<QnaInfores> resp = qnaInfoDao.findById(qnaInfores.getQnaId());
+        Optional<QnaInfores> resp = qnaInfoDao.findById(qnaInfores.getQnaId());
         return passwordEncoder.matches(password, resp.get().getPassWord());
     }
 }
