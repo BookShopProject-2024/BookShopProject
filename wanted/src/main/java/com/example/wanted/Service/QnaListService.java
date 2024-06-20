@@ -2,6 +2,8 @@ package com.example.wanted.Service;
 
 import com.example.wanted.Dao.QnaInfoDao;
 import com.example.wanted.Vo.QnaInfores;
+import io.micrometer.core.instrument.util.StringUtils;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,19 +11,26 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class QnaListService {
 
     @Autowired
     private QnaInfoDao qnaInfoDao;
     private QnaInfores qnaInfores;
 
+    //WebSecurityConfig에서 Bean으로 생성된 의존성을 주입받음
+    private final PasswordEncoder passwordEncoder;
+    
     private static final Logger logger = LoggerFactory.getLogger(QnaListService.class);
 
 
@@ -36,8 +45,24 @@ public class QnaListService {
         qnaInfores = new QnaInfores();
         qnaInfores.setTitle(params.get("Title"));
         qnaInfores.setContent(params.get("Content"));
-        qnaInfores.setWriter(params.get("Password"));
+        qnaInfores.setWriter(params.get("Writer"));
+        if(StringUtils.isNotEmpty(params.get("Password"))){
+            qnaInfores.setPassWord(passwordEncoder.encode(params.get("Password")));
+        }else{
+            qnaInfores.setPassWord(params.get("Password"));
+        }
         String resp = String.valueOf(qnaInfoDao.save(qnaInfores));
         return resp;
+    }
+
+    public boolean matchPassword(HashMap<String, String> params) {
+
+        String password = params.get("Password");
+        logger.info("**"+params.get("qnaId"));
+        QnaInfores qnaInfores = new QnaInfores();
+        qnaInfores.setQnaId((long) Integer.parseInt(params.get("qnaId")));
+
+            Optional<QnaInfores> resp = qnaInfoDao.findById(qnaInfores.getQnaId());
+        return passwordEncoder.matches(password, resp.get().getPassWord());
     }
 }

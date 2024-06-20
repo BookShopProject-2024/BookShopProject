@@ -4,13 +4,13 @@
     padding: 20px;
 }
 
-.post-title {
+.notice-post-title {
     font-size: 2em;
     margin-bottom: 20px;
     color: #333;
 }
 
-.post-meta {
+.notice-post-meta {
     display: flex;
     justify-content: space-between;
     font-size: 0.9em;

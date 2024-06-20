@@ -26,7 +26,6 @@ public class QnaInfores extends BaseTimeEntity{
     @Column(unique = false,length = 50)
     private String writer;
 
-    @NonNull
     @Column(unique = false,length = 1000)
     private String passWord;
 

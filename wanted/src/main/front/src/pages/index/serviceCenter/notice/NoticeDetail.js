@@ -26,8 +26,8 @@ function NoticeDetail() {
 
     return (
         <div className="post-detail-container">
-            <h1 className="post-title">{post.title}</h1>
-            <div className="post-meta">
+            <h1 className="notice-post-title">{post.title}</h1>
+            <div className="notice-post-meta">
                 <span>작성자: {post.writer}</span>
                 <span>{new Date(post.date).toLocaleDateString()}</span>
             </div>
