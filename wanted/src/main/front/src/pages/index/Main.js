@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import NoticeList from "./serviceCenter/notice/NoticeList";
 import EventList from "./event/EventList";
 import SecondSlider from "../../layout/SecondSliders";
-import PopupEventList from "./event/PopupEventList";
 import MainPopup from "./event/MainPopup";
 
 function Main() {
