@@ -1,4 +1,5 @@
 import {Route, Routes} from "react-router-dom";
+import About from "./about/About"
 import BookList from "./book/BookList";
 import BookInfo from "./book/BookInfo";
 import EventList from "./event/EventList";
@@ -18,6 +19,7 @@ function App() {
   return (
       <Routes>
           <Route path="/" element={<Main/>}></Route>
+          <Route path="/about" element={<About/>}></Route>
           <Route path="/bookList" element={<BookList/>}></Route>
           <Route path="/bookInfo/:bookId" element={<BookInfo/>}></Route>
           <Route path="/eventList" element={<EventList/>}></Route>
