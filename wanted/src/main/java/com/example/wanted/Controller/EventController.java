@@ -36,6 +36,12 @@ public class EventController {
 		return ResponseEntity.ok(availableEvents);
 	}
 
+	@GetMapping("/{id}")
+	public ResponseEntity<EventInfoes> getEventById(@PathVariable Long id) {
+		EventInfoes eventInfoes = eventService.getEventInfoById(id);
+		return ResponseEntity.ok(eventInfoes);
+	}
+
 	@PostMapping
 	public ResponseEntity<String> createEvent(@RequestBody EventInfoDto eventInfoDto) {
 		String eventName = eventService.makeEvent(eventInfoDto);
