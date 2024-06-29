@@ -2,7 +2,7 @@ import '../../css/Main.css';
 import Sliders from "../../layout/Sliders";
 import React, { useState, useEffect } from "react";
 import NoticeList from "./serviceCenter/notice/NoticeList";
-import EventList from "./event/EventList";
+import EventList from "./event/BookList";
 import SecondSlider from "../../layout/SecondSliders";
 import MainPopup from "./event/MainPopup";
 

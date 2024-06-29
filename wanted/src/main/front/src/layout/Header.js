@@ -17,7 +17,7 @@ const Header = () => {
                             <li><Link to="/bookPurchase">구매</Link></li>
                         </ul>
                     </li>
-                    <li><Link to="/eventList">이벤트</Link></li>
+                    <li><Link to="/events">이벤트</Link></li>
                     <li className="dropdown">
                         <Link to="/customerCenter">고객센터</Link>
                         <ul className="dropdown-content">

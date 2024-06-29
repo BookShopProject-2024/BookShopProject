@@ -1,43 +1,64 @@
-//상태와 effect란?
-import React, {useState,useEffect} from 'react';
-import axios from 'axios';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
-import  "../../../css/Main.css";
 
-function BookList() {
-    const [eventList,setEventList] = useState([]);
-    const [loading,setLoading] = useState(true);
-    const getEventList = async () => {
-        //await 이란?
-        try{
-            const resp = await axios.get('/info/bookList/');
-            const data = resp.data; //데이타에 저장
-            setEventList(data); // 받아온 정보를 BookList에 저장
-            setLoading(false); // 로딩 상태를 false로 변경
-            }catch(error){
-            console.error("Error fetching bookList",error);
-            setLoading(true); // 로딩 상태를 false로 변경
-        }
+const fetchData = async (url, setEventList, setLoading) => {
+    try {
+        const response = await axios.get(url);
+        const data = response.data;
+        setEventList(data);
+        setLoading(false);
+    } catch (error) {
+        console.error("Error fetching event list:", error);
+        setLoading(false);
+    }
+};
+
+function EventList() {
+    const [eventList, setEventList] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchData('/info/events', setEventList, setLoading);
+    }, []);
+
+    const handleFetchAllEvents = () => {
+        setLoading(true);
+        fetchData('/info/events', setEventList, setLoading);
     };
 
-    useEffect(()=>{
-        getEventList(); //게시글 목록 조회 함수 호출
-    },[]);
+    const handleFetchAvailableEvents = () => {
+        setLoading(true);
+        fetchData('/info/events/available', setEventList, setLoading);
+    };
 
-    return(
+    return (
         <div>
-            <ul>
-                {loading ? (<h2>Loading...</h2>)
-                    :(<h2 className="noDot">Event</h2>)
-                }
-                {eventList.map((board)=> (
-                    <li className="noDot" key={board.bookId}>
-                        <Link to={`/bookInfo/${board.bookId}`}>{board.title} {board.bookId}</Link>
-                    </li>
-                ))}
-            </ul>
+            <button onClick={handleFetchAllEvents}>전체 이벤트</button>
+            <button onClick={handleFetchAvailableEvents}>Available Events</button>
+            {loading ? (
+                <p>로딩 중...</p>
+            ) : (
+                <div>
+                    {eventList.length > 0 ? (
+                        <ul>
+                            {eventList.map(event => (
+                                <li key={event.eventId}>
+                                    <Link to={`/events/${event.eventId}`}>
+                                        <h2>{event.eventName}</h2>
+                                        <p>{event.description}</p>
+                                        <p>{new Date(event.eventStartDate).toLocaleString()} - {new Date(event.eventEndDate).toLocaleString()}</p>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>이벤트가 없습니다.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
 
-export default BookList;
+export default EventList;
