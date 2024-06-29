@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +31,12 @@ public class QnaListController {
     @ResponseBody
     public String getQnaContent(@RequestBody HashMap<String,String> params){
 
-
         return qnaListService.saveqnaContent(params);
+    }
+
+    @RequestMapping(value="/info/qnaSearchPWContent",method = RequestMethod.POST)
+    @ResponseBody
+    public boolean getQnaPWContent(@RequestBody HashMap<String,String> params){
+        return qnaListService.matchPassword(params);
     }
 }
