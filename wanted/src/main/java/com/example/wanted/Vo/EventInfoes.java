@@ -14,13 +14,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.example.wanted.Dto.EventInfoDto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
-@Table(name = "event_info")
+@Table(name = "eventinfo")
 @Getter
-@NoArgsConstructor
 public class EventInfoes extends BaseTimeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +51,10 @@ public class EventInfoes extends BaseTimeEntity {
 	// 만약 이벤트에 트래픽이 몰리는걸 방지하고자 서버를 분리하면
 	// @Column(unique = false,length=60000)
 	// private String eventLocation;
+
+	public EventInfoes(){
+
+	}
 
 	public EventInfoes(EventInfoDto eventInfoDto) {
 		this.eventName = eventInfoDto.getEventName();

@@ -32,6 +32,10 @@ public class EventService {
 		return eventInfoDao.findByEventEndDateGreaterThanEqual(now);
 	}
 
+	public EventInfoes getEventInfoById(Long id) {
+		return eventInfoDao.findById(id).orElseThrow(()-> new NoSuchElementException());
+	}
+
 	@Transactional
 	public String makeEvent(EventInfoDto eventInfoDto) {
 		EventInfoes eventInfoes = new EventInfoes(eventInfoDto);
