@@ -25,3 +25,9 @@ replay_pid*
 
 # Db properties, server PW
 *.properties
+
+# Ignore environment file for frontend
+wanted/src/main/front/.env
+
+# Ignore data sources configuration file for IDE
+.idea/dataSources.cml
