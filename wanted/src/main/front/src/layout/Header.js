@@ -27,8 +27,8 @@ const Header = () => {
                         </ul>
                     </li>
                     <div className="auth-links">
-                        <li><Link to="/login" className="small-font bottom-align">로그인</Link></li>
-                        <li><Link to="/signup" className="small-font bottom-align">회원가입</Link></li>
+                        <li><Link to="/signIn" className="small-font bottom-align">로그인</Link></li>
+                        <li><Link to="/signUp" className="small-font bottom-align">회원가입</Link></li>
                     </div>
                 </ul>
             </nav>

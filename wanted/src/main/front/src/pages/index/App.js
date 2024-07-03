@@ -8,8 +8,9 @@ import NoticeList from "./serviceCenter/notice/NoticeList";
 import NoticeDetail from "./serviceCenter/notice/NoticeDetail";
 import QnaList from "./serviceCenter/qna/QnaList";
 import QnaContent from "./serviceCenter/qna/QnaContent";
-import CustomerCenter from "./serviceCenter/qna/CustomerCenter"
-
+import CustomerCenter from "./serviceCenter/qna/CustomerCenter";
+import SignIn from "./sign/SignIn";
+import SignUp from "./sign/SignUp";
 import Main from "./Main";
 import React from "react";
 import EventInfoDetail from "./event/EventInfoDetail";
@@ -30,6 +31,8 @@ function App() {
           <Route path="/questionAndAnswer" element={<QnaList/>}></Route>
           <Route path="/qnaContent" element={<QnaContent/>}></Route>
           <Route path="/customerCenter" element={<CustomerCenter/>}></Route>
+          <Route path="/signIn" element={<SignIn/>}></Route>
+          <Route path="/signUp" element={<SignUp/>}></Route>
       </Routes>
   );
 }
