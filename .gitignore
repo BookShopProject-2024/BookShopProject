@@ -30,4 +30,4 @@ replay_pid*
 wanted/src/main/front/.env
 
 # Ignore data sources configuration file for IDE
-.idea/dataSources.cml
+.idea/dataSources.xml
