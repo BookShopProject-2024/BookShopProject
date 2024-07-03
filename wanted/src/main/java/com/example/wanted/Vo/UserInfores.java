@@ -39,6 +39,10 @@ public class UserInfores {
     @Column(unique = false,length = 500)
     private String address;
 
+    @NonNull
+    @Column(unique = false,length = 500)
+    private String zipcode;
+
     @Enumerated(EnumType.STRING)
     private Authority authority;
 

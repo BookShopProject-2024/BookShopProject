@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../../../css/signUpForm.css'; // CSS 파일 import
 import axios from 'axios';
+import Modal from 'react-modal';
+import { LoadScript, Autocomplete } from '@react-google-maps/api';
+
+const libraries = ["places"];
 
 const SignUpForm = () => {
     const [formData, setFormData] = useState({
@@ -8,14 +12,18 @@ const SignUpForm = () => {
         userName: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        telNo: '',
+        address: '',
+        zipcode: ''
     });
 
     const [passwordMatch, setPasswordMatch] = useState(true);
+    const [autocomplete, setAutocomplete] = useState(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(()=>{
-        setPasswordMatch(formData.password===formData.confirmPassword);;
-
+        setPasswordMatch(formData.password===formData.confirmPassword);
     },[formData.password,formData.confirmPassword]);
 
 
@@ -48,6 +56,41 @@ const SignUpForm = () => {
         } else {
             alert("비밀번호가 일치하지 않습니다.");
         }
+    };
+
+    const handlePlaceSelect = () => {
+        if (autocomplete !== null) {
+            const place = autocomplete.getPlace();
+            if (place.address_components) {
+                const address = place.formatted_address;
+                let zipCode = '';
+                for (const component of place.address_components) {
+                    const componentType = component.types[0];
+                    if (componentType === 'postal_code') {
+                        zipCode = component.long_name;
+                    }
+                }
+                setFormData({
+                    ...formData,
+                    address: address,
+                    zipCode: zipCode
+                });
+                setModalIsOpen(false); // 주소 선택 후 모달 닫기
+            }
+        } else {
+            console.log('Autocomplete is not loaded yet!');
+        }
+    };
+    const onLoad = (autocompleteInstance) => {
+        setAutocomplete(autocompleteInstance);
+    };
+
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
     };
 
     return (
@@ -112,8 +155,65 @@ const SignUpForm = () => {
                         required
                     />
                 </div>
+                <div className="form-group">
+                    <label htmlFor="telNo">전화번호</label>
+                    <input
+                        type="text"
+                        id="telNo"
+                        name="telNo"
+                        value={formData.telNo}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="address">주소</label>
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        value={formData.address}
+                        readOnly
+                        placeholder="주소를 입력하려면 클릭하세요"
+                        onClick={openModal}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="zipCode">우편번호</label>
+                    <input
+                        type="text"
+                        id="zipCode"
+                        name="zipCode"
+                        value={formData.zipCode}
+                        readOnly
+                        required
+                    />
+                </div>
                 <button type="submit" className="submit-button">회원가입</button>
             </form>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="주소 입력"
+                ariaHideApp={false}
+                className="address-modal"
+            >
+                <h2>주소 입력</h2>
+                <LoadScript googleMapsApiKey="" libraries={libraries}>
+                <Autocomplete
+                        onLoad={onLoad}
+                        onPlaceChanged={handlePlaceSelect}
+                    >
+                        <input
+                            type="text"
+                            id="autocomplete"
+                            placeholder="주소를 입력하세요"
+                        />
+                    </Autocomplete>
+                </LoadScript>
+                <button onClick={closeModal} className="close-button">닫기</button>
+            </Modal>
         </div>
     );
 };

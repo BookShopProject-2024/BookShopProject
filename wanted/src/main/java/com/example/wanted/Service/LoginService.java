@@ -37,10 +37,11 @@ public class LoginService {
         userInfores.setUserId(params.get("userId"));
         userInfores.setPassWord(passwordEncoder.encode(params.get("password")));
         userInfores.setUserName(params.get("userName"));
-//        userInfores.setTelNo(params.get("telNo"));
+        userInfores.setTelNo(params.get("telNo"));
         userInfores.setEmail(params.get("email"));
-  //      userInfores.setAddress(params.get("address"));
-            userInfores.setAuthority(Authority.ROLE_USER);
+        userInfores.setAddress(params.get("address"));
+        userInfores.setZipcode(params.get("zipcode"));
+        userInfores.setAuthority(Authority.ROLE_USER);
         String resp = String.valueOf(userDao.save(userInfores));
         logger.info("결과:"+resp);
 

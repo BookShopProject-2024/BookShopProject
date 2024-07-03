@@ -54,3 +54,60 @@
     font-size: 14px;
     margin-top: 5px;
 }
+
+/* 모달 스타일 */
+.address-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 500px;
+    z-index: 1000;
+}
+
+.address-modal h2 {
+    margin-top: 0;
+}
+
+.address-modal input {
+    width: calc(100% - 16px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.close-button {
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+}
+
+.close-button:hover {
+    background-color: #0056b3;
+}
+
+/* 모달 오버레이 스타일 */
+.ReactModal__Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
