@@ -8,7 +8,6 @@ function QnaList() {
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const itemsPerPage = 6;
-
     const getQnaList = async (pageNum) => {
         try {
             const resp = await axios.get('/info/qnaList', {
@@ -19,11 +18,11 @@ function QnaList() {
             });
 
             const data = resp.data;
-
             if (data.length === 0) {
                 setHasMore(false);
             } else {
                 setQnaList((prevQnaList) => [...prevQnaList, ...data]);
+
             }
         } catch (error) {
             console.error("Error fetching qnaList", error);
@@ -47,7 +46,7 @@ function QnaList() {
             endMessage={<p style={{ textAlign: 'center' }}>모든 Q&A를 불러왔습니다.</p>}
         >
             <div className="Qna">
-                <h1 className="title">Q&A</h1>
+                <h1>Q&A</h1>
                 <nav className="navbar">
                     <ul className="nav-tabs">
                         <li className="nav-item "><a href="/customerCenter">전체</a></li>
@@ -56,7 +55,15 @@ function QnaList() {
                     </ul>
                 </nav>
                 {qnaList.map((qnaItem) => (
-                    <Post title={qnaItem.title} content={qnaItem.content} key={qnaItem.qnaId}/>
+
+                    <Post
+                        key={qnaItem.qnaId}
+                        title={qnaItem.title}
+                        content={qnaItem.content}
+                        qnaId={qnaItem.qnaId}
+                        passWord={qnaItem.passWord}
+                    />
+
                 ))
                 }
 

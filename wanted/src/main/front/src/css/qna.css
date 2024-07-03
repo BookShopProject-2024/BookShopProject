@@ -1,6 +1,5 @@
 body {
     font-family: Arial, sans-serif;
-    padding: 20px;
     height: 100%;
     margin: 0;
     overflow-y: auto;
@@ -19,8 +18,6 @@ body {
 
 .form-container {
     max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
@@ -59,7 +56,7 @@ body {
     text-align: center;
 }
 .content-text-area{
-    height: 253px;
+    height: 231px;
 }
 .form-container{
     max-width :1000px;
