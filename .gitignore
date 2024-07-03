@@ -30,7 +30,7 @@ replay_pid*
 wanted/src/main/front/.env
 
 # Ignore data sources configuration file for IDE
-.idea/dataSources.xml
+.idea/**
 
 # Ignore node_modules in the root directory
 node_modules/**
