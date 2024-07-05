@@ -36,4 +36,7 @@ public class BookInfores {
     @NonNull
     @Column(unique = false,length=50)
     private int price;
+    @NonNull
+    @Column(unique = false,length=50)
+    private String imgLocation;
 }

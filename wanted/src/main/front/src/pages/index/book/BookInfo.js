@@ -33,7 +33,7 @@ function BookInfo() {
     return (
         <div>
             {loading ? (
-                <h2>Loading...</h2> // 로딩 중일 때 표시할 내용
+                <h2 className="book-list">Loading...</h2> // 로딩 중일 때 표시할 내용
             ) : (
                 bookInfo && ( // bookInfo가 존재할 때 BookDetail 컴포넌트 렌더링
                     <BookDetail
@@ -41,6 +41,8 @@ function BookInfo() {
                         title={bookInfo.title}
                         description={bookInfo.description}
                         author={bookInfo.author}
+                        imgLocation={bookInfo.imgLocation}
+                        price={bookInfo.price}
                     />
                 )
             )}

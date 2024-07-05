@@ -37,6 +37,7 @@ public class QnaListService {
         //JPA로 Paging 및 orderby를 지원하는 Pageable
         Pageable pageable = PageRequest.of(page,size,Sort.by(Sort.Order.desc("qnaId")));
         Page<QnaInfores> result = qnaInfoDao.findAll(pageable);
+//        logger.info("test : " + pageable);
         return  result.getContent();
     }
 

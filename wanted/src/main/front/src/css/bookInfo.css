@@ -1,26 +1,98 @@
-.book-info-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Arial, sans-serif';
+/* src/BookList.css */
+body {
+    font-family: Arial, sans-serif;
 }
 
-.book-details {
+.book-list {
+    padding: 150px;
+    text-align: center;
+}
+
+.book-grid {
+    margin-top:50px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 한 줄에 5개의 책 카드 */
+    gap: 50px;
+}
+
+.book-item {
+    list-style: none;
+}
+
+.book-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.book-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.book-title {
+    font-size: 18px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.book-author {
+    font-size: 14px;
+    color: #555;
+}
+
+/* 페이징 스타일 */
+.pagination {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.pagination li {
+    list-style: none;
+    margin: 0 5px;
+}
+
+.pagination li a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 8px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination li a:hover {
+    background-color: #f1f1f1;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/*book detail*/
+/* src/BookDetails.css */
+
+.book-details {
+    padding: 150px 550px 0 550px;
 }
 
 .book-header {
     display: flex;
     align-items: flex-start;
-    width: 100%;
+    gap: 50px;
+    margin-bottom: 20px;
 }
 
-.book-cover {
-    width: 200px; /* 이미지 크기를 더 크게 설정 */
-    height: auto;
-    margin-right: 20px;
+.book-detail-cover {
+    width: 40%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .book-meta {
@@ -28,39 +100,31 @@
 }
 
 .book-meta h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.book-meta p {
-    margin: 5px 0;
-}
-
-.book-meta-details {
-    display: flex;
-    flex-wrap: wrap; /* 가로로 배치하고 줄이 넘칠 경우 다음 줄로 넘김 */
+    margin-top: 0;
 }
 
 .book-meta-details p {
-    flex: 1 1 50%; /* 각 항목이 절반 너비를 차지하도록 설정 */
-    margin: 5px 0; /* 각 항목의 상하 여백 설정 */
+    margin: 10px 0;
 }
+
 .purchase-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007BFF;
+    margin-top: 10px;
+    background-color: #007bff;
     color: white;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-
+    border-radius: 4px;
 }
 
-.book-description {
-    margin-top: 20px;
+.purchase-button:hover {
+    background-color: #0056b3;
 }
 
 .book-description h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.book-description p {
+    line-height: 1.6;
 }
