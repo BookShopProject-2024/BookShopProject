@@ -28,11 +28,10 @@ public class LoginService {
     public boolean matchUserPassWord(HashMap<String, String> params) {
         UserInfores resp = userDao.findByUserId(params.get("userId"));
         String password = params.get("password");
-
         return passwordEncoder.matches(password,resp.getPassWord());
     }
 
-    public boolean saveUserInfo(HashMap<String, String> params) {
+    public String saveUserInfo(HashMap<String, String> params) {
         userInfores = new UserInfores();
         userInfores.setUserId(params.get("userId"));
         userInfores.setPassWord(passwordEncoder.encode(params.get("password")));
@@ -43,8 +42,7 @@ public class LoginService {
         userInfores.setZipcode(params.get("zipcode"));
         userInfores.setAuthority(Authority.ROLE_USER);
         String resp = String.valueOf(userDao.save(userInfores));
-        logger.info("결과:"+resp);
 
-        return true;
+        return resp;
     }
 }

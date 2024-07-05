@@ -44,6 +44,7 @@ public class WebSecurityConfig{
         .antMatchers("/css/**").permitAll()
         //info로 시작하는 것은 인증 x
         .antMatchers("/info/**").permitAll()
+        .antMatchers("/customer/**").permitAll()
         // 어떤 요청이든 '인증'
         .anyRequest().authenticated();
                 // 로그인 기능 허용
@@ -56,7 +57,7 @@ public class WebSecurityConfig{
                 .apply(new JwtSecurityConfig(tokenProvider));
         ;// 로그아웃 기능 허용
         http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/customer/logout"))
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
         return http.build();

@@ -3,7 +3,6 @@ import About from "./about/About"
 import BookList from "./book/BookList";
 import BookInfo from "./book/BookInfo";
 import EventList from "./event/EventList";
-import EventInfo from "./event/EventInfo";
 import NoticeList from "./serviceCenter/notice/NoticeList";
 import NoticeDetail from "./serviceCenter/notice/NoticeDetail";
 import QnaList from "./serviceCenter/qna/QnaList";
@@ -12,11 +11,18 @@ import CustomerCenter from "./serviceCenter/qna/CustomerCenter";
 import SignIn from "./sign/SignIn";
 import SignUp from "./sign/SignUp";
 import Main from "./Main";
-import React from "react";
 import EventInfoDetail from "./event/EventInfoDetail";
-
+import React, {useEffect} from "react";
+import axios from "axios";
 
 function App() {
+    useEffect(()=>{
+        const csrfTokenMeta = document.querySelector("meta[name='_csrf']");
+        console.log("Token "+csrfTokenMeta);
+        if(csrfTokenMeta){
+            axios.defaults.headers.common["X-XSRF-TOKEN"]=csrfTokenMeta.content;
+        }
+    },[]);
 
   return (
       <Routes>
