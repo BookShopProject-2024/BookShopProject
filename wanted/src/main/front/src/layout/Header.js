@@ -1,8 +1,20 @@
-/* Header.js */
-import React from 'react';
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import { isTokenValid, logout } from '../pages/index/Auth';
 import "../css/header.css";
+
 const Header = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        setIsLoggedIn(isTokenValid());
+    }, []);
+
+    const handleLogout = () => {
+        logout();
+        setIsLoggedIn(false);
+        window.location.href = '/';
+    };
 
     return (
         <header>
@@ -27,8 +39,14 @@ const Header = () => {
                         </ul>
                     </li>
                     <div className="auth-links">
-                        <li><Link to="/signIn" className="small-font bottom-align">로그인</Link></li>
-                        <li><Link to="/signUp" className="small-font bottom-align">회원가입</Link></li>
+                        {isLoggedIn ? (
+                            <li><button onClick={handleLogout} className="small-font bottom-align">로그아웃</button></li>
+                        ) : (
+                            <>
+                                <li><Link to="/signIn" className="small-font bottom-align">로그인</Link></li>
+                                <li><Link to="/signUp" className="small-font bottom-align">회원가입</Link></li>
+                            </>
+                        )}
                     </div>
                 </ul>
             </nav>

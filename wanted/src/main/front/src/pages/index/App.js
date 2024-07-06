@@ -16,13 +16,6 @@ import React, {useEffect} from "react";
 import axios from "axios";
 
 function App() {
-    useEffect(()=>{
-        const csrfTokenMeta = document.querySelector("meta[name='_csrf']");
-        console.log("Token "+csrfTokenMeta);
-        if(csrfTokenMeta){
-            axios.defaults.headers.common["X-XSRF-TOKEN"]=csrfTokenMeta.content;
-        }
-    },[]);
 
   return (
       <Routes>

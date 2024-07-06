@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../../../pages/index/axiosInstance";
+import axiosInstance from "../AxiosInstance";
 
 const SignIn = () => {
     const [loginInput, setLoginInput] = useState({
@@ -14,15 +14,17 @@ const SignIn = () => {
     const onLogin = async (e) => {
         e.preventDefault(); // 기본 폼 제출 방지
         try {
-            const res = await axiosInstance.post('/customer/matchLogin', {
+            const res = await axiosInstance.post('/customer/matchLogin',
+                {
                 userId: loginInput.userId,
                 password: loginInput.password,
-            });
+                }
+            );
 
             if (res.status === 200) {
-                console.log(res.data);
+                localStorage.setItem('authToken', res.data.authToken.accessToken); // 로컬 스토리지에 토큰 저장
                 alert("로그인 성공!");
-
+               // window.location.href = '/'; // 로그인 성공 후 리다이렉션
                 // 추가 로그인 성공 시 동작
             }
         } catch (error) {

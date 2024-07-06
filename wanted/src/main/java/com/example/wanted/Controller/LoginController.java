@@ -6,11 +6,14 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.HashMap;
 
 //Controller 선언
@@ -26,14 +29,21 @@ public class LoginController {
 
     @RequestMapping(value="/customer/matchLogin",method = RequestMethod.POST)
     @ResponseBody
-    public boolean login(@RequestBody HashMap<String,String> params, HttpServletRequest request){
+    public HashMap<String,Object> login(@RequestBody HashMap<String,String> params, HttpServletRequest request){
         logger.info("Login");
         boolean matchLogin = loginService.matchUserPassWord(params);
+        HashMap<String,Object> map = new HashMap<>();
         if(matchLogin){
             HttpSession session  = request.getSession();
             session.setAttribute("userId",params.get("userId"));
+            Principal principal = request.getUserPrincipal();
+            Authentication authentication = new UsernamePasswordAuthenticationToken(params.get("userId"),params.get("password"));
+            map.put("authToken",jwtTokenProvider.generateTokenDto(authentication));
+            return map;
+        }else{
+            return map;
         }
-        return matchLogin;
+
     }
 
     @RequestMapping(value="/info/signUp",method = RequestMethod.POST)
