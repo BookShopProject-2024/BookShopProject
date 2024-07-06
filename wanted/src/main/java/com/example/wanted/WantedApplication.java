@@ -21,7 +21,12 @@ public class WantedApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 WebMvcConfigurer.super.addCorsMappings(registry);
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("GET","POST");
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:3000")
+                        .allowedMethods("GET","POST")
+                       // .allowedHeaders("*")
+                        .allowCredentials(true);
+                       // .maxAge(3600);
             }
         };
     }

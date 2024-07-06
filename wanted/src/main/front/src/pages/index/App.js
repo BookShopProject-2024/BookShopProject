@@ -3,17 +3,17 @@ import About from "./about/About"
 import BookList from "./book/BookList";
 import BookInfo from "./book/BookInfo";
 import EventList from "./event/EventList";
-import EventInfo from "./event/EventInfo";
 import NoticeList from "./serviceCenter/notice/NoticeList";
-import NoticeInfo from "./serviceCenter/notice/NoticeInfo";
+import NoticeDetail from "./serviceCenter/notice/NoticeDetail";
 import QnaList from "./serviceCenter/qna/QnaList";
 import QnaContent from "./serviceCenter/qna/QnaContent";
-import CustomerCenter from "./serviceCenter/qna/CustomerCenter"
-
+import CustomerCenter from "./serviceCenter/qna/CustomerCenter";
+import SignIn from "./sign/SignIn";
+import SignUp from "./sign/SignUp";
 import Main from "./Main";
-import React from "react";
 import EventInfoDetail from "./event/EventInfoDetail";
-
+import React, {useEffect} from "react";
+import axios from "axios";
 
 function App() {
 
@@ -26,10 +26,12 @@ function App() {
           <Route path="/events" element={<EventList/>}></Route>
           <Route path="/events/:eventId" element={<EventInfoDetail/>}></Route>
           <Route path="/noticeList" element={<NoticeList/>}></Route>
-          <Route path="/noticeInfo/:noticeId" element={<NoticeInfo/>}></Route>
+          <Route path="/noticeDetail/:noticeId" element={<NoticeDetail/>}></Route>
           <Route path="/questionAndAnswer" element={<QnaList/>}></Route>
           <Route path="/qnaContent" element={<QnaContent/>}></Route>
           <Route path="/customerCenter" element={<CustomerCenter/>}></Route>
+          <Route path="/signIn" element={<SignIn/>}></Route>
+          <Route path="/signUp" element={<SignUp/>}></Route>
       </Routes>
   );
 }

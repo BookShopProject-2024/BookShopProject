@@ -23,3 +23,7 @@ redisson:
       address: "redis://127.0.0.1:6379"
       connectionPoolSize: 64
       connectionMinimumIdleSize: 24
+
+jwt:
+  secret:
+    key: pqb8dxqxzJNisqxFo8BW3tn5EU2a5trDLoLUjLpFZvs=

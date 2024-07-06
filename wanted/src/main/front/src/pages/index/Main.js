@@ -1,9 +1,10 @@
 import '../../css/Main.css';
 import Sliders from "../../layout/Sliders";
-import React, { useState, useEffect } from "react";
-import NoticeList from "./serviceCenter/notice/NoticeList";
+import React,{useState,useEffect} from "react";
+import NoticeList from "./main/MainNoticeList";
 import EventList from "./event/BookList";
-import SecondSlider from "../../layout/SecondSliders";
+import SecondSlider from "../../layout/SecondSliders"
+import QnaList from "./main/MainQnaList";
 import MainPopup from "./event/MainPopup";
 
 function Main() {
@@ -42,9 +43,9 @@ function Main() {
             <Sliders />
             <SecondSlider />
             <div className="ListContainer">
-                <NoticeList />
-                <EventList />
-                <h2><a className="removeDecoration" href="/questionAndAnswer">Q&A</a></h2>
+                <NoticeList></NoticeList>
+                <EventList></EventList>
+                <QnaList></QnaList>
             </div>
             {showMainPop && <MainPopup setShowMainPop={setShowMainPop} />}
         </div>
