@@ -17,6 +17,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //security 관련 의존성
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-crypto'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -28,6 +29,11 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
+    // jwt 관련 의존성
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
     testImplementation('org.projectlombok:lombok')
     testAnnotationProcessor('org.projectlombok:lombok')
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
