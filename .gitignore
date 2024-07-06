@@ -25,3 +25,15 @@ replay_pid*
 
 # Db properties, server PW
 *.properties
+
+# Ignore environment file for frontend
+wanted/src/main/front/.env
+
+# Ignore data sources configuration file for IDE
+.idea/**
+
+# Ignore node_modules in the root directory
+node_modules/**
+
+# Ignore node_modules in the wanted directory
+wanted/node_modules/**
