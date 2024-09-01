@@ -22,9 +22,9 @@ code {
   flex: 1;
 }
 
-.Footer {
-  margin-top: 50px; /* App과 Footer 간의 간격을 조정 */
-  padding: 20px;
-  background-color: #f1f1f1;
-  text-align: center;
-}
+/*.Footer {*/
+/*  margin-top: 50px; !* App과 Footer 간의 간격을 조정 *!*/
+/*  padding: 20px;*/
+/*  background-color: #f1f1f1;*/
+/*  text-align: center;*/
+/*}*/

@@ -38,13 +38,13 @@ function QnaList() {
     };
 
     return (
-        <InfiniteScroll
-            next={loadMore}
-            hasMore={hasMore}
-            dataLength={qnaList.length}
-            loader={<h2>Loading...</h2>}
-            endMessage={<p style={{ textAlign: 'center' }}>모든 Q&A를 불러왔습니다.</p>}
-        >
+        // <InfiniteScroll
+        //     next={loadMore}
+        //     hasMore={hasMore}
+        //     dataLength={qnaList.length}
+        //     loader={<h2>Loading...</h2>}
+        //     endMessage={<p style={{ textAlign: 'center' }}>모든 Q&A를 불러왔습니다.</p>}
+        // >
             <div className="Qna">
                 <h1>Q&A</h1>
                 <nav className="navbar">
@@ -52,6 +52,7 @@ function QnaList() {
                         <li className="nav-item "><a href="/customerCenter">전체</a></li>
                         <li className="nav-item"><a href="/noticeList">공지사항</a></li>
                         <li className="nav-item active"><a href="/questionAndAnswer">질의 응답</a></li>
+                        <li className="nav-item"><a href="/faqList">자주 묻는 질문</a></li>
                     </ul>
                 </nav>
                 {qnaList.map((qnaItem) => (
@@ -70,7 +71,7 @@ function QnaList() {
                 <a href="/qnaContent" className="purchase-button">질문하기</a>
 
             </div>
-        </InfiniteScroll>
+        // </InfiniteScroll>
     )
 };
 

@@ -1,45 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "../../../../css/noticeList.css"
-import {Link} from "react-router-dom";
+import "../../../../css/noticeList.css";
+import { Link } from "react-router-dom";
 
-function NoticeList() {
+function FAQList() {
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchType, setSearchType] = useState('title');
-    const [filteredNotices, setFilteredNotices] = useState([]);
+    const [searchType, setSearchType] = useState('question');
+    const [filteredFaqs, setFilteredFaqs] = useState([]);
 
     useEffect(() => {
-        // 게시물 목록을 가져오는 함수
-        const fetchNotices = async () => {
+        const fetchFaqs = async () => {
             try {
-                const response = await axios.get('/info/noticeList');
-                setFilteredNotices(response.data);
+                const response = await axios.get('/info/faqList');
+                setFilteredFaqs(response.data);
             } catch (error) {
-                console.error('Error fetching notices:', error);
+                console.error('Error fetching FAQs:', error);
             }
         };
-        fetchNotices();
+        fetchFaqs();
     }, []);
 
-    // 검색 및 정렬 로직
-    const searchNotice = () => {
-        const filtered = filteredNotices.filter(notice =>
+    const searchFaq = () => {
+        const filtered = filteredFaqs.filter(faq =>
             searchType === 'writer'
-                ? notice.writer.toLowerCase().includes(searchTerm.toLowerCase())
-                : notice.title.toLowerCase().includes(searchTerm.toLowerCase())
+                ? faq.writer.toLowerCase().includes(searchTerm.toLowerCase())
+                : faq.question.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
-        setFilteredNotices(filtered);
+        setFilteredFaqs(filtered);
     };
-    const activeEvent=(e)=>{
-        if(e.key==='Enter'){
-            searchNotice();
+
+    const activeEvent = (e) => {
+        if (e.key === 'Enter') {
+            searchFaq();
         }
-    }
+    };
 
     return (
         <div className="notice-list-container">
-            <h1 className="title">공지사항</h1>
+            <h1 className="title">자주 묻는 질문</h1>
             <nav className="navbar">
                 <ul className="nav-tabs">
                     <li className="nav-item "><a href="/customerCenter">전체</a></li>
@@ -55,33 +54,33 @@ function NoticeList() {
                     onChange={(e) => setSearchType(e.target.value)}
                     className="search-select"
                 >
-                    <option value="title">제목</option>
+                    <option value="question">제목</option>
                     <option value="writer">작성자</option>
                 </select>
                 <input
                     type="text"
                     placeholder="검색어를 입력해주세요"
                     value={searchTerm}
-                    onKeyDown={(e)=>activeEvent(e)}
+                    onKeyDown={activeEvent}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="search-input"
                 />
-                <button className="search-button" onClick={searchNotice}>🔍</button>
+                <button className="search-button" onClick={searchFaq}>🔍</button>
             </div>
             <ul className="notice-list">
-                {filteredNotices.map((notice) => (
-                    <li key={notice.noticeId} className="notice-item">
-                        <div className="notice-id">{notice.noticeId}</div>
+                {filteredFaqs.map((faq) => (
+                    <li key={faq.faqId} className="notice-item">
+                        <div className="notice-id">{faq.faqId}</div>
                         <div className="notice-info">
-                            <span className="notice-category">공지사항| {new Date(notice.date).toLocaleDateString()}</span>
+                            <span className="notice-category">FAQ | {new Date(faq.date).toLocaleDateString()}</span>
                             <div className="notice-header">
                                 <h4 className="notice-title">
-                                    <Link className="remove-decoration" to={`/noticeDetail/${notice.noticeId}`}>{notice.title}</Link>
+                                    <Link className="remove-decoration"
+                                          to={`/faqDetail/${faq.faqId}`}>{faq.question}</Link>
                                 </h4>
-                                <span className="notice-author">작성자 : {notice.writer}</span>
+                                <span className="notice-author">작성자 : {faq.writer}</span>
                             </div>
                         </div>
-
                     </li>
                 ))}
             </ul>
@@ -89,4 +88,4 @@ function NoticeList() {
     );
 }
 
-export default NoticeList;
+export default FAQList;
