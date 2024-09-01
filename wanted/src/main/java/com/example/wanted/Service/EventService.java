@@ -9,6 +9,10 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.wanted.Dao.EventInfoDao;
@@ -30,6 +34,13 @@ public class EventService {
 	public List<EventInfoes> getAvailableEventInfoes() {
 		LocalDateTime now = LocalDateTime.now();
 		return eventInfoDao.findByEventEndDateGreaterThanEqual(now);
+	}
+
+	public List<EventInfoes> getAvailableEventPage(int page,int size) {
+		LocalDateTime now = LocalDateTime.now();
+		Pageable pageable = PageRequest.of(page,size, Sort.by(Sort.Order.asc("eventId")));
+		Page<EventInfoes> result = eventInfoDao.findByEventEndDateGreaterThanEqual(pageable, now);
+		return result.getContent();
 	}
 
 	public EventInfoes getEventInfoById(Long id) {

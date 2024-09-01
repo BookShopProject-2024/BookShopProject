@@ -112,39 +112,74 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* 팝업을 최상위에 표시 */
+  z-index: 999;
 }
 
 .main-popup {
-  background-color: #fff; /* 팝업 배경색 */
-  border: 2px solid #fff; /* 하얀 윤곽선 */
-  padding: 20px; /* 내부 여백 */
-  border-radius: 10px; /* 모서리 둥글게 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  text-align: center;
-  max-width: 500px; /* 최대 너비 */
-  width: 80%; /* 뷰포트 너비의 80% */
+  width: 600px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-popup h1 {
-  margin-bottom: 20px; /* 제목 아래 여백 */
+  margin-top: 0;
+}
+
+.main-popup ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  overflow-y: auto;
+  flex-grow: 1;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #888 #e0e0e0; /* For Firefox */
+}
+
+.main-popup ul::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.main-popup ul::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
+
+.main-popup ul::-webkit-scrollbar-track {
+  background-color: #e0e0e0; /* Color of the scrollbar track */
+}
+
+.main-popup ul li {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.main-popup ul li:last-child {
+  border-bottom: none;
 }
 
 .main-popup button {
-  margin: 5px; /* 버튼 간격 */
-  padding: 10px 20px; /* 버튼 패딩 */
-  border: none; /* 버튼 테두리 제거 */
-  border-radius: 5px; /* 버튼 모서리 둥글게 */
-  background-color: #007bff; /* 버튼 배경색 */
-  color: #fff; /* 버튼 텍스트 색 */
-  cursor: pointer; /* 마우스 포인터 */
-  font-size: 16px; /* 버튼 폰트 크기 */
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
 }
 
-.main-popup button:hover {
-  background-color: #0056b3; /* 버튼 호버 색상 */
+.main-popup button:first-of-type {
+  margin-right: 10px;
 }
