@@ -46,6 +46,7 @@ public class JwtTokenProvider {
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
+        logger.info("인증"+authorities);
 
         long now = (new Date()).getTime();
 
@@ -107,4 +108,5 @@ public class JwtTokenProvider {
             return e.getClaims();
         }
     }
+
 }
