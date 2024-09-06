@@ -57,9 +57,13 @@ public class WebSecurityConfig{
                 .apply(new JwtSecurityConfig(tokenProvider));
         ;// 로그아웃 기능 허용
         http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/customer/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/info/logout"))
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
+
+        http.sessionManagement() //중복로그인 제어
+                .maximumSessions(1) //세션 최대 허용 수
+                .maxSessionsPreventsLogin(false); // false: 중복 로그인하면 이전 로그인이 풀림
         return http.build();
     }
 

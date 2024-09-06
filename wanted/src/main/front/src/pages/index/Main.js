@@ -44,7 +44,6 @@ function Main() {
             <SecondSlider />
             <div className="ListContainer">
                 <NoticeList></NoticeList>
-                <EventList></EventList>
                 <QnaList></QnaList>
             </div>
             {showMainPop && <MainPopup setShowMainPop={setShowMainPop} />}
