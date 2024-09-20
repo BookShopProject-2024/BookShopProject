@@ -46,7 +46,7 @@ const Header = () => {
                                     </li>
                                     {isAuthenticated ? (
                                         <li className="auth-links">
-                                            <Link onClick={removeAuthToken} className="small-font bottom-align">로그아웃</Link>
+                                            <button onClick={removeAuthToken} className="small-font bottom-align">로그아웃</button>
                                         </li>
                                     ) : (
                                         <>
