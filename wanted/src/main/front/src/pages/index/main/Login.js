@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../../index/axiosInstance";
+import axiosInstance from "../AxiosInstance";
 
 const Login = () => {
     const [loginInput, setLoginInput] = useState({

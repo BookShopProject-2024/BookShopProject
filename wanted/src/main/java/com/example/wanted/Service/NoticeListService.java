@@ -19,7 +19,9 @@ public class NoticeListService {
     private static final Logger logger = LoggerFactory.getLogger(NoticeListService.class);
 
     public List<NoticeInfores> findAllNoticeList() {
+            //뭐해야될꺼같아?
 
+            // DB를 불려야됨
      return noticeInfoDao.findAll();
 
     }
