@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axiosInstance from "../AxiosInstance";
+import { Navigate } from "react-router-dom";
 
 const SignIn = () => {
     const [loginInput, setLoginInput] = useState({
         userId: "",
         password: "",
     });
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleInputChange = (e) => {
         setLoginInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -14,24 +16,23 @@ const SignIn = () => {
     const onLogin = async (e) => {
         e.preventDefault(); // 기본 폼 제출 방지
         try {
-            const res = await axiosInstance.post('/customer/matchLogin',
-                {
-                userId: loginInput.userId,
-                password: loginInput.password,
-                }
-            );
+            const res = await axiosInstance.post('/customer/matchLogin', loginInput);
 
-            if (res.status === 200) {
+            if (res.data && res.data.authToken) {
                 localStorage.setItem('authToken', res.data.authToken.accessToken); // 로컬 스토리지에 토큰 저장
-                alert("로그인 성공!");
-               // window.location.href = '/'; // 로그인 성공 후 리다이렉션
-                // 추가 로그인 성공 시 동작
+                setIsLoggedIn(true); // 로그인 상태를 true로 설정
+            } else {
+                throw new Error("Invalid response format");
             }
         } catch (error) {
-            console.log(error);
-            alert("로그인 실패: " + (error.response ? error.response.data.message : "서버 문제"));
+            console.error("Login error:", error);
+            alert("로그인 실패: " + (error.response?.data?.message || "서버 문제"));
         }
     };
+
+    if (isLoggedIn) {
+        return <Navigate to="/" replace />;
+    }
 
     return (
         <>

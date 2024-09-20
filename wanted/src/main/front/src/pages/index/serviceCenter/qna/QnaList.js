@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import "../../../../css/qna.css";
-import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "./QnaDetail";
 function QnaList() {
     const [qnaList, setQnaList] = useState([]);
@@ -38,13 +37,6 @@ function QnaList() {
     };
 
     return (
-        // <InfiniteScroll
-        //     next={loadMore}
-        //     hasMore={hasMore}
-        //     dataLength={qnaList.length}
-        //     loader={<h2>Loading...</h2>}
-        //     endMessage={<p style={{ textAlign: 'center' }}>모든 Q&A를 불러왔습니다.</p>}
-        // >
             <div className="Qna">
                 <h1>Q&A</h1>
                 <nav className="navbar">
@@ -69,10 +61,8 @@ function QnaList() {
                 }
 
                 <a href="/qnaContent" className="purchase-button">질문하기</a>
-
             </div>
-        // </InfiniteScroll>
     )
-};
+}
 
 export default QnaList;

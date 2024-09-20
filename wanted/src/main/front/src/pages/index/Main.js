@@ -2,15 +2,16 @@ import '../../css/Main.css';
 import Sliders from "../../layout/Sliders";
 import React,{useState,useEffect} from "react";
 import NoticeList from "./main/MainNoticeList";
-import EventList from "./event/BookList";
 import SecondSlider from "../../layout/SecondSliders"
 import QnaList from "./main/MainQnaList";
 import MainPopup from "./event/MainPopup";
+import { useAuth } from '../index/AuthContext';
 
 function Main() {
     const [isMobile, setIsMobile] = useState(false);
     const [showMainPop, setShowMainPop] = useState(false);
     const HOME_VISITED = localStorage.getItem("homeVisited");
+    const { isAuthenticated, setAuthToken } = useAuth();
 
     useEffect(() => {
         const handleResize = () => {
@@ -34,6 +35,16 @@ function Main() {
 
         handleMainPop();
         window.setTimeout(handleMainPop, 1000);
+
+        // 토큰 검사 로직
+        const checkToken = () => {
+            const token = localStorage.getItem('authToken');
+            if (token && !isAuthenticated) {
+                setAuthToken(token);
+            }
+        };
+
+        checkToken();
 
         return () => window.removeEventListener('resize', handleResize);
     }, [HOME_VISITED]);

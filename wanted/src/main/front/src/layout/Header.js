@@ -1,9 +1,12 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from '../pages/index/AuthContext';
 import "../css/headerStyle.css";
 import "../css/headerBoot.css"
 import "../css/header.css"
+
 const Header = () => {
+    const { isAuthenticated, removeAuthToken } = useAuth();
 
     return (
         <section id="header">
@@ -32,7 +35,7 @@ const Header = () => {
                                             <li><Link to="/bookPurchase">구매</Link></li>
                                         </ul>
                                     </li>
-                                    <li><Link to="/eventList">이벤트</Link></li>
+                                    <li><Link to="/events">이벤트</Link></li>
                                     <li className="dropdown">
                                         <Link to="/customerCenter">고객센터</Link>
                                         <ul className="dropdown-content">
@@ -41,12 +44,20 @@ const Header = () => {
                                             <li><Link to="/questionAndAnswer">질의응답</Link></li>
                                         </ul>
                                     </li>
-                                    <li className="auth-links">
-                                        <Link to="/signIn" className="small-font bottom-align">로그인</Link>
-                                    </li>
-                                    <li className="auth-links">
-                                        <Link to="/signup" className="small-font bottom-align">회원가입</Link>
-                                    </li>
+                                    {isAuthenticated ? (
+                                        <li className="auth-links">
+                                            <Link onClick={removeAuthToken} className="small-font bottom-align">로그아웃</Link>
+                                        </li>
+                                    ) : (
+                                        <>
+                                            <li className="auth-links">
+                                                <Link to="/signIn" className="small-font bottom-align">로그인</Link>
+                                            </li>
+                                            <li className="auth-links">
+                                                <Link to="/signup" className="small-font bottom-align">회원가입</Link>
+                                            </li>
+                                        </>
+                                    )}
                                 </ul>
                                 <ul>
 
@@ -56,8 +67,8 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-        </section>
 
+        </section>
     );
 };
 
