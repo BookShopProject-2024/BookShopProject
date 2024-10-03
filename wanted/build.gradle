@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.17'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
+
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
@@ -12,6 +13,49 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+def frontendDir = "$projectDir/src/main/front"
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["$projectDir/src/main/resources"]
+        }
+    }
+}
+
+processResources {
+    dependsOn "copyReactBuildFiles"
+}
+
+task installReact(type: Exec) {
+    workingDir "$frontendDir"
+    inputs.dir "$frontendDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine "npm.cmd", "install"
+    } else {
+        commandLine "npm", "install"
+    }
+}
+
+task buildReact(type: Exec) {
+    dependsOn "installReact"
+    workingDir "$frontendDir"
+    inputs.dir "$frontendDir"
+    group = BasePlugin.BUILD_GROUP
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine "npm.cmd", "run-script", "build"
+    } else {
+        commandLine "npm", "run-script", "build"
+    }
+}
+
+task copyReactBuildFiles(type: Copy) {
+    dependsOn "buildReact"
+    from "$frontendDir/build"
+    into "$projectDir/src/main/resources/static"
 }
 
 dependencies {
@@ -45,4 +89,3 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
-
