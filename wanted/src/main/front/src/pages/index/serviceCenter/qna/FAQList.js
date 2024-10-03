@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "../../../../css/noticeList.css";
-import { Link } from "react-router-dom";
+import "../../../../css/faq.css";
+import { Link, useNavigate } from "react-router-dom";
+import Post from "./QnaDetail";
 
 function FAQList() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchType, setSearchType] = useState('question');
     const [filteredFaqs, setFilteredFaqs] = useState([]);
+    const [newFAQ, setNewFAQ] = useState({ title: '', content: '', language: 'ko' });
+    const history = useNavigate();
 
     useEffect(() => {
         const fetchFaqs = async () => {
@@ -24,9 +27,8 @@ function FAQList() {
         const filtered = filteredFaqs.filter(faq =>
             searchType === 'writer'
                 ? faq.writer.toLowerCase().includes(searchTerm.toLowerCase())
-                : faq.question.toLowerCase().includes(searchTerm.toLowerCase())
+                : faq.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
-
         setFilteredFaqs(filtered);
     };
 
@@ -37,17 +39,19 @@ function FAQList() {
     };
 
     return (
-        <div className="notice-list-container">
+        <div className="faq-list-container">
             <h1 className="title">자주 묻는 질문</h1>
             <nav className="navbar">
                 <ul className="nav-tabs">
-                    <li className="nav-item "><a href="/customerCenter">전체</a></li>
-                    <li className="nav-item active"><a href="/noticeList">공지사항</a></li>
+                    <li className="nav-item"><a href="/customerCenter">전체</a></li>
+                    <li className="nav-item"><a href="/noticeList">공지사항</a></li>
                     <li className="nav-item"><a href="/questionAndAnswer">질의 응답</a></li>
-                    <li className="nav-item"><a href="/faqList">자주 묻는 질문</a></li>
+                    <li className="nav-item active"><a href="/faqList">자주 묻는 질문</a></li>
                 </ul>
             </nav>
             <br/>
+
+            {/* 검색 바 - FAQ 목록 위로 이동 */}
             <div className="search-sort-bar">
                 <select
                     value={searchType}
@@ -67,23 +71,25 @@ function FAQList() {
                 />
                 <button className="search-button" onClick={searchFaq}>🔍</button>
             </div>
-            <ul className="notice-list">
+
+            {/* FAQ 목록 - 검색 바 아래로 이동 */}
+            <ul className="faq-list">
                 {filteredFaqs.map((faq) => (
-                    <li key={faq.faqId} className="notice-item">
-                        <div className="notice-id">{faq.faqId}</div>
-                        <div className="notice-info">
-                            <span className="notice-category">FAQ | {new Date(faq.date).toLocaleDateString()}</span>
-                            <div className="notice-header">
-                                <h4 className="notice-title">
-                                    <Link className="remove-decoration"
-                                          to={`/faqDetail/${faq.faqId}`}>{faq.question}</Link>
+                    <li key={faq.faqId} className="faq-item">
+                        <div className="faq-id">{faq.FAQId}</div>
+                        <div className="faq-info">
+                            <span className="faq-category">FAQ | 자주 묻는 질문 </span>
+                            <div className="faq-header">
+                                <h4 className="faq-title">
+                                    <span to={`/faqDetail/${faq.FAQId}`}>{faq.title}</span>
+                                    <span> | {faq.content}</span>
                                 </h4>
-                                <span className="notice-author">작성자 : {faq.writer}</span>
                             </div>
                         </div>
                     </li>
                 ))}
             </ul>
+
         </div>
     );
 }

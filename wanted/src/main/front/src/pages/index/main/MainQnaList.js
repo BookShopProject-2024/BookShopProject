@@ -30,17 +30,17 @@ function MainQnaList() {
 
     return (
         <div className="notice-list-container">
-            <h2>Q&A <a className="main-more-link" href="/questionAndAnswer"> 더보기 > </a></h2>
+           <a href="/questionAndAnswer"><h2>Q&A</h2></a>
 
             <ul className="notice-list">
                 {qnaList.map((qna,Index) => (
                     <li key={qna.qnaId} className="notice-item">
-                        <div className="notice-id">{Index + 1}</div>
+                        {/*<div className="notice-id">{Index + 1}</div>*/}
                         <div className="notice-info">
                             <span className="notice-category">Q&A | {new Date(qna.date).toLocaleDateString()}</span>
                             <div className="notice-header">
                                 <h4 className="notice-title">
-                                    <Link className="remove-decoration" to={`/qnaList/${qna.qnaId}`}>{qna.title}</Link>
+                                    <span className="remove-decoration" to={`/qnaList/${qna.qnaId}`}>{qna.title}</span>
                                 </h4>
                                 <span className="notice-author">작성자: {qna.writer}</span>
                             </div>
