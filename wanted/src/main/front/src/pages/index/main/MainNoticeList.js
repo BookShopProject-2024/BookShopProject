@@ -22,17 +22,17 @@ function MainNoticeList() {
 
     return (
         <div className="notice-list-container">
-            <h2>공지사항 <a className="main-more-link" href="/noticeList"> 더보기 > </a></h2>
+            <a  href="/noticeList"><h2>공지사항</h2></a>
 
             <ul className="notice-list">
             {noticeList.map((notice) => (
                     <li key={notice.noticeId} className="notice-item">
-                        <div className="notice-id">{notice.noticeId}</div>
+                        {/*<div className="notice-id">{notice.noticeId}</div>*/}
                         <div className="notice-info">
                             <span className="notice-category">공지사항 | {new Date(notice.date).toLocaleDateString()}</span>
                             <div className="notice-header">
                                 <h4 className="notice-title">
-                                    <Link className="remove-decoration" to={`/noticeDetail/${notice.noticeId}`}>{notice.title}</Link>
+                                    <span className="remove-decoration" to={`/noticeDetail/${notice.noticeId}`}>{notice.title}</span>
                                 </h4>
                                 <span className="notice-author">작성자: {notice.writer}</span>
                             </div>

@@ -43,6 +43,7 @@ function App() {
                             <Route path="/qnaContent" element={<QnaContent/>}/>
                             <Route path="/customerCenter" element={<CustomerCenter/>}/>
                             <Route path="/faqList" element={<FAQList/>}/>
+                            <Route path="/faqList/:FAQId" element={<faqDetail/>}/>
                             <Route path="/signIn" element={<SignIn />}/>
                             <Route path="/signUp" element={<SignUp/>}/>
                         </Routes>

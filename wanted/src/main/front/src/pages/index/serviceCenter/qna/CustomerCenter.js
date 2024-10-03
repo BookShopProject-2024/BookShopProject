@@ -9,6 +9,7 @@ import Post from "./QnaDetail";
 function CustomerCenter() {
     const [noticeList, setNoticeList] = useState([]);
     const [qnaList, setQnaList] = useState([]);
+    const [filteredFaqs, setFilteredFaqs] = useState([]);
     const itemsPerPage = 6;
 
     useEffect(() => {
@@ -42,6 +43,18 @@ function CustomerCenter() {
         fetchQna();
     }, []);
 
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const response = await axios.get('/info/faqList');
+                setFilteredFaqs(response.data);
+            } catch (error) {
+                console.error('Error fetching FAQs:', error);
+            }
+        };
+        fetchFaqs();
+    }, []);
+
     return (
         <div className="customerCenter">
             <h1 className="title">고객센터</h1>
@@ -62,9 +75,10 @@ function CustomerCenter() {
                 <ul className="notice-list">
                     {noticeList.map((notice) => (
                         <li key={notice.noticeId} className="notice-item">
-                            <div className="notice-id">{notice.noticeId}</div>
+                            {/*<div className="notice-id">{notice.noticeId}</div>*/}
                             <div className="notice-info">
-                                <span className="notice-category">공지사항| {new Date(notice.date).toLocaleDateString()}</span>
+                                <span
+                                    className="notice-category">공지사항| {new Date(notice.date).toLocaleDateString()}</span>
                                 <div className="notice-header">
                                     <h4 className="notice-title">
                                         <Link className="remove-decoration"
@@ -86,6 +100,23 @@ function CustomerCenter() {
                             qnaId={qna.qnaId}
                             passWord={qna.passWord}
                         />
+                    ))}
+                </ul>
+                <h3>자주 묻는 질문</h3>
+                <ul className="faq-list">
+                    {filteredFaqs.map((faq) => (
+                        <li key={faq.faqId} className="faq-item">
+                            <div className="faq-id">{faq.FAQId}</div>
+                            <div className="faq-info">
+                                <span className="faq-category">FAQ | 자주 묻는 질문 </span>
+                                <div className="faq-header">
+                                    <h4 className="faq-title">
+                                        <span to={`/faqDetail/${faq.FAQId}`}>{faq.title}</span>
+                                        <span> | {faq.content}</span>
+                                    </h4>
+                                </div>
+                            </div>
+                        </li>
                     ))}
                 </ul>
             </div>

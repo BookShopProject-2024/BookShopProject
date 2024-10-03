@@ -71,7 +71,7 @@ function NoticeList() {
             <ul className="notice-list">
                 {filteredNotices.map((notice) => (
                     <li key={notice.noticeId} className="notice-item">
-                        <div className="notice-id">{notice.noticeId}</div>
+                        {/*<div className="notice-id">{notice.noticeId}</div>*/}
                         <div className="notice-info">
                             <span className="notice-category">공지사항| {new Date(notice.date).toLocaleDateString()}</span>
                             <div className="notice-header">
