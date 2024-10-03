@@ -11,8 +11,8 @@ function BookInfo() {
     const getBookInfo = async () => {
         try {
             // axios.get()의 결과를 기다림
-           // const response = await axios.get(`/bookList/bookInfo/bookId=${bookId}`);
-            const response = await axios.get(`/info/bookList/bookInfo`, { params: { bookId } });
+            const response = await axios.get(`/info/bookList/bookInfo/${bookId}`);
+            //const response = await axios.get(`/info/bookList/bookInfo`, { params: { bookId } });
             // response.data에 필요한 데이터가 있음
             const data = response.data;
 

@@ -25,7 +25,7 @@ public class BookListController {
     }
 
     // 특정 도서 정보를 조회 - 관리자, 유저 둘다
-    @GetMapping("/{bookId}")
+    @GetMapping("/bookInfo/{bookId}")
     public BookInfoDto getBookInfo(@PathVariable Long bookId) {
         logger.info("Fetching book with ID: {}", bookId);
         return bookListService.findOneBookInfo(bookId);
