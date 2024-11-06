@@ -200,7 +200,7 @@ const SignUpForm = () => {
                 className="address-modal"
             >
                 <h2>주소 입력</h2>
-                <LoadScript googleMapsApiKey="AIzaSyB7XvKzrLlaghLGZitW9dBR7Z7DiP31Zr0" libraries={libraries}>
+                <LoadScript googleMapsApiKey="카톡 참고하여 입력" libraries={libraries}>
                 <Autocomplete
                         onLoad={onLoad}
                         onPlaceChanged={handlePlaceSelect}
